@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Conversor de Soluções</string>
+    <!-- zerando valores -->
+    <string name="zero">0</string>
+    <!--banner informações -->
+    <string name="banner_ad_unit_id"> ca-app-pub-5242902797962945/6935374914 </string>
+    <!-- para os sppiners -->
+    <string-array name="tipoSoro">
+        <item>SF</item>
+        <item>SG</item>
+        <item>AD</item>
+    </string-array>
+    <string-array name="ampola">
+        <item>NaCl</item>
+        <item>KCl</item>
+        <item>G</item>
+    </string-array>
+    <!-- para as labels -->
+    <string name="lblPrescrito">Prescrito:</string>
+    <string name="lblExistente">Existente:</string>
+    <string name="lblConverter">Converter em:</string>
+    <string name="lblUtilizar">Utilizar Ampolas de:</string>
+    <string name="lblVolume">% e Volume de </string>
+    <string name="ml">ml</string>
+    <string name="cmdBotao">Converter</string>
+    <string name="ou">ou</string>
+    <string name="amp">Ampolas</string>
+    <string name="extrair">Remover $ ml do frasco disponível.</string>
+    <string name="incluir">Incluir $ ml da(s) ampolas de % no frasco disponível</string>
+    <string name="mlOu">ml ou </string>
+    <string name="resultado">Resultado:</string>
+    <string name="ok">OK</string>
+</resources>

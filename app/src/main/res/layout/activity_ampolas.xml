@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/lblUtilizar"
+        android:id="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TableLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/tblPrimeiro"
+        android:layout_height="80dp">
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="3dp">
+
+            <Spinner
+                android:id="@+id/spnAmpola"
+                android:entries="@array/ampola"
+                android:freezesText="true"
+                android:layout_height="match_parent"
+                android:layout_width="99dp" />
+
+            <EditText
+                android:selectAllOnFocus="true"
+                android:inputType="numberDecimal"
+                android:ems="3"
+                android:id="@+id/txtPorcentoAmpola"
+                android:digits="1234567890."
+                android:maxLength="3"
+                android:text="@string/zero"
+                android:freezesText="true"
+                android:layout_width="fill_parent" />
+
+            <TextView
+                android:id="@+id/txtVolumeDesejado"
+                android:text="@string/lblVolume"
+                android:layout_width="wrap_content"/>
+
+            <EditText
+                android:selectAllOnFocus="true"
+                android:inputType="number"
+                android:ems="4"
+                android:digits="1234567890"
+                android:maxLength="4"
+                android:id="@+id/txtVolumeAmpola"
+                android:text="@string/zero"
+                android:freezesText="true"
+                android:layout_width="80dp" />
+
+            <TextView
+                android:id="@+id/txtML3"
+                android:text="@string/ml"
+                android:layout_width="wrap_content"/>
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>
