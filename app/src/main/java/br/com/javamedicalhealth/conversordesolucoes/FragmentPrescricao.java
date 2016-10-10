@@ -59,7 +59,7 @@ public class FragmentPrescricao extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    ModelSolucao.getInstance().setPorcentPrescrito(Integer.parseInt(txtVolume.getText().toString()));
+                    ModelSolucao.getInstance().setVolumePrescrito(Integer.parseInt(txtVolume.getText().toString()));
                 }
             }
         });
