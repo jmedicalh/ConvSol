@@ -3,9 +3,12 @@ package br.com.javamedicalhealth.conversordesolucoes;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,14 +24,11 @@ public class FragmentPrescricao extends Fragment {
     private TextView txtVolume;
     private Spinner spnTipo;
 
-    ModelSolucao modelo;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_prescrito, container, false);
         return view;
-
     }
 
 
@@ -39,13 +39,39 @@ public class FragmentPrescricao extends Fragment {
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumePrescrito);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnPrescrito);
 
+        //validações dos campos onleave
+        txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    if(txtPorcento.getText().length() < 1){
+                        txtPorcento.setText("0");
+                    }
+                    ModelSolucao.getInstance().setPorcentPrescrito(Float.parseFloat(txtPorcento.getText().toString()));
+                }
+            }
+        });
+
+        txtVolume.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    if(txtVolume.getTextSize() < 1){
+                        txtVolume.setText("0");
+                    }
+                    ModelSolucao.getInstance().setPorcentPrescrito(Integer.parseInt(txtVolume.getText().toString()));
+                }
+            }
+        });
+
     }
 
-    public void setaValores(float porcento, int volume, int tipo){
-        int m = ModelSolucao.getInstance().getVolumeAmpola();
-
-        ModelSolucao.getInstance().setVolumeAmpola(10);
-
-        m = ModelSolucao.getInstance().getVolumeAmpola();
+    public void carregaValores(){
+        txtPorcento.setText(String.valueOf( ModelSolucao.getInstance().getPorcentPrescrito()));
+        txtVolume.setText(String.valueOf(ModelSolucao.getInstance().getVolumePrescrito()));
+        spnTipo.setSelection(ModelSolucao.getInstance().getTipoPrescrito());
     }
+
+
+
 }
