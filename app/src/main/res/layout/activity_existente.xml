@@ -42,7 +42,8 @@
                 android:digits="1234567890."
                 android:maxLength="3"
                 android:text="@string/zero"
-                android:freezesText="true"/>
+                android:freezesText="true"
+                android:imeOptions="actionNext"/>
 
             <TextView
                 android:id="@+id/txtVolumeExit"
@@ -58,7 +59,8 @@
                 android:id="@+id/txtVolumeExistente"
                 android:layout_width="wrap_content"
                 android:text="@string/zero"
-                android:freezesText="true"/>
+                android:freezesText="true"
+                android:imeOptions="actionNext"/>
 
             <TextView
                 android:id="@+id/txtML"
