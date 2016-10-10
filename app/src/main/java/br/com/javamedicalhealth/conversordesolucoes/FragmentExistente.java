@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
+
 /**
  * Created by isaac on 06/10/16.
  */
@@ -34,6 +36,30 @@ public class FragmentExistente extends Fragment {
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
 
+        //validações dos campos onleave
+        txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    if(txtPorcento.getText().length() < 1){
+                        txtPorcento.setText("0");
+                    }
+                    ModelSolucao.getInstance().setPorcentExistente(Float.parseFloat(txtPorcento.getText().toString()));
+                }
+            }
+        });
+
+        txtVolume.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus){
+                    if(txtVolume.getTextSize() < 1){
+                        txtVolume.setText("0");
+                    }
+                    ModelSolucao.getInstance().setVolumeExistente(Integer.parseInt(txtVolume.getText().toString()));
+                }
+            }
+        });
     }
 
 }
