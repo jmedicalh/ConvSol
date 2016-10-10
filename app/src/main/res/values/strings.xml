@@ -26,7 +26,7 @@
     <string name="ou">ou</string>
     <string name="amp">Ampolas</string>
     <string name="extrair">Remover $ ml do frasco disponível.</string>
-    <string name="incluir">Incluir $ ml da(s) ampolas de % no frasco disponível</string>
+    <string name="incluir">Incluir $ ml da(s) ampolas de % em # frasco(s) disponível(is)</string>
     <string name="mlOu">ml ou </string>
     <string name="resultado">Resultado:</string>
     <string name="ok">OK</string>
