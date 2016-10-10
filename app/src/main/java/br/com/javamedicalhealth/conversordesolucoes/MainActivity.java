@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void chamaResultado() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.fragPrescricao, resultado);
+        ft.replace(R.id.fragPrescricao, resultado);
         ft.commit();
     }
 
