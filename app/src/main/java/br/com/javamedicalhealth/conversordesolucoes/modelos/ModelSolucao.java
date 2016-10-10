@@ -57,7 +57,7 @@ public class ModelSolucao {
         this.tipoPrescrito = tipoPrescrito;
     }
 
-    public double getPorcentPrescrito() {
+    public float getPorcentPrescrito() {
         return porcentPrescrito;
     }
 
@@ -81,7 +81,7 @@ public class ModelSolucao {
         this.tipoExistente = tipoExistente;
     }
 
-    public double getPorcentExistente() {
+    public float getPorcentExistente() {
         return porcentExistente;
     }
 
@@ -105,7 +105,7 @@ public class ModelSolucao {
         this.tipoAmpola = tipoAmpola;
     }
 
-    public double getPorcentAmpola() {
+    public float getPorcentAmpola() {
         return porcentAmpola;
     }
 
