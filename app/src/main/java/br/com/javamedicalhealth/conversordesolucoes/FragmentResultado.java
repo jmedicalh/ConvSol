@@ -114,7 +114,7 @@ public class FragmentResultado extends Fragment{
             numBolsas = 1;
         }else{
             calcular.setVolume(volExistente);
-            numBolsas = volExistente / volPrescrito;
+            numBolsas = volPrescrito /volExistente;
         }
         Resources resources = getResources();
         String [] tipoAmpola = resources.getStringArray(R.array.ampola);
