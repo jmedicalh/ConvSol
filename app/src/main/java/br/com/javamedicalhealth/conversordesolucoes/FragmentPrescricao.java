@@ -47,7 +47,12 @@ public class FragmentPrescricao extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    ModelSolucao.getInstance().setPorcentPrescrito(Float.parseFloat(txtPorcento.getText().toString()));
+                    String v = txtPorcento.getText().toString();
+                    if(v.indexOf(".") == 0){
+                        v = "0" + v;
+                        txtPorcento.setText(v);
+                    }
+                    ModelSolucao.getInstance().setPorcentPrescrito(Float.parseFloat(v));
                 }
             }
         });
