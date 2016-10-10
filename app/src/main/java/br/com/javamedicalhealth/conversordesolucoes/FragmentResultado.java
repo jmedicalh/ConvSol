@@ -4,7 +4,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.common.SignInButton;
 
-import br.com.javamedicalhealth.conversordesolucoes.MainActivity;
-import br.com.javamedicalhealth.conversordesolucoes.R;
 import br.com.javamedicalhealth.conversordesolucoes.conversor.CalculoConversao;
 import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
@@ -93,9 +89,7 @@ public class FragmentResultado extends Fragment{
         mAdView.loadAd(adRequest);
         /*fim da inicialização da propaganda*/
 
-
         //calculo o soro
-
         calcularSoro();
     }
 
