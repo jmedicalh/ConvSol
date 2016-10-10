@@ -1,8 +1,10 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentExistente existente = new FragmentExistente();
     FragmentAmpolas ampolas = new FragmentAmpolas();
     FragmentBotao botao = new FragmentBotao();
+    FragmentResultado resultado = new FragmentResultado();
 
     //modelo
     ModelSolucao modelo;
@@ -78,6 +81,35 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft
                 .add(R.id.fragPrescricao, prescricao, "fragPrescricao")
+                .add(R.id.fragExistente, existente, "fragExistente")
+                .add(R.id.fragAmpola, ampolas, "fragAmpolas")
+                .add(R.id.fragBotao, botao, "fragBotao")
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void onClick(View view){
+        //apago os fragmentos
+        apagaFragments();
+        //chamo metodo de criação do fragmento de resultado
+        chamaResultado();
+    }
+
+    private void chamaResultado() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.fragPrescricao, resultado);
+        ft.commit();
+    }
+
+    public void apagaFragments() {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.popBackStack();
+    }
+
+    public void reInflaFragments(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft
+                .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
                 .add(R.id.fragExistente, existente, "fragExistente")
                 .add(R.id.fragAmpola, ampolas, "fragAmpolas")
                 .add(R.id.fragBotao, botao, "fragBotao")
