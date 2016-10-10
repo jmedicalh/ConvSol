@@ -1,8 +1,10 @@
-package br.com.javamedicalhealth.conversordesolucoes.modelos;
+package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import com.google.android.gms.common.SignInButton;
 
 import br.com.javamedicalhealth.conversordesolucoes.MainActivity;
 import br.com.javamedicalhealth.conversordesolucoes.R;
+import br.com.javamedicalhealth.conversordesolucoes.conversor.CalculoConversao;
+import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
 /**
  * Created by isaac on 10/10/16.
@@ -26,8 +30,8 @@ public class FragmentResultado extends Fragment{
 
     Button button;
 
-    String valor = "";
-    String strTipoAmpola = "";
+    //para o calculo
+    CalculoConversao calcular = new CalculoConversao();
 
     private AdView mAdView;
 
@@ -88,14 +92,50 @@ public class FragmentResultado extends Fragment{
                 .build();
         mAdView.loadAd(adRequest);
         /*fim da inicialização da propaganda*/
+
+
+        //calculo o soro
+
+        calcularSoro();
     }
 
-    public void setResultado(){
+    private void calcularSoro(){
+        calcular.setPM(ModelSolucao.getInstance().getPorcentPrescrito());
+        calcular.setAmp(ModelSolucao.getInstance().getPorcentAmpola());
+        calcular.setExist(ModelSolucao.getInstance().getPorcentExistente());
+        //verifico volumes
+        int volJogarFora = 0;
+        int numBolsas = 0;
+        int volPrescrito = ModelSolucao.getInstance().getVolumePrescrito();
+        int volExistente = ModelSolucao.getInstance().getVolumeExistente();
+        if(volPrescrito < volExistente){
+            volJogarFora = volExistente - volPrescrito;
+            calcular.setVolume(volPrescrito);
+            numBolsas = 1;
+        }else{
+            calcular.setVolume(volExistente);
+            numBolsas = volExistente / volPrescrito;
+        }
+        Resources resources = getResources();
+        String [] tipoAmpola = resources.getStringArray(R.array.ampola);
+
+        setResultado(calcular.Calcula(), tipoAmpola[ModelSolucao.getInstance().getTipoAmpola()], Integer.toString(numBolsas), volJogarFora);
+
+    }
+
+    public void setResultado(String valor, String strTipoAmpola, String frascos, int volJogarFora){
         String msg = getView().getResources().getString(R.string.extrair);
-        msg = msg.replace("$", valor);
+        if(volJogarFora > 0){
+            float f = (float) volJogarFora;
+            f = f +  Float.parseFloat(valor);
+            msg = msg.replace("$", Float.toString(f));
+        }else {
+            msg = msg.replace("$", valor);
+        }
         String msg2 = getView().getResources().getString(R.string.incluir);
         msg2 = msg2.replace("$", valor);
         msg2 = msg2.replace("%", strTipoAmpola);
+        msg2 = msg2.replace("#", frascos);
         txtLinha1.setText(msg);
         txtLinha2.setText(msg2);
     }
