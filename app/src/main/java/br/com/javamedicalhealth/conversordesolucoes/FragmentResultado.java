@@ -83,7 +83,7 @@ public class FragmentResultado extends Fragment{
         mAdView = (AdView)view.findViewById(R.id.adView2);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                //.addTestDevice("51F83EC4EB4E675EC829C36DF863C8A1")
+                .addTestDevice("04307137381340F4DFFFC5DDFBB5C8E3")
                 .addTestDevice("435FD46EBF905EF6B3A9106B76E6B757")
                 .build();
         mAdView.loadAd(adRequest);
@@ -107,6 +107,7 @@ public class FragmentResultado extends Fragment{
             calcular.setVolume(volPrescrito);
             numBolsas = 1;
         }else{
+            volJogarFora = 0;
             calcular.setVolume(volExistente);
             numBolsas = volPrescrito /volExistente;
         }
