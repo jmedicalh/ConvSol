@@ -88,14 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void onClick(View view){
-        //apago os fragmentos
-        apagaFragments();
-        //chamo metodo de criação do fragmento de resultado
-        chamaResultado();
-    }
 
-    private void chamaResultado() {
+
+    public void chamaResultado() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragPrescricao, resultado);
         ft.commit();
