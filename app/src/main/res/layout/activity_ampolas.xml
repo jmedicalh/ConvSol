@@ -42,7 +42,8 @@
                 android:maxLength="3"
                 android:text="@string/zero"
                 android:freezesText="true"
-                android:layout_width="fill_parent" />
+                android:layout_width="fill_parent"
+                android:imeOptions="actionNext"/>
 
             <TextView
                 android:id="@+id/txtVolumeDesejado"
@@ -58,7 +59,8 @@
                 android:id="@+id/txtVolumeAmpola"
                 android:text="@string/zero"
                 android:freezesText="true"
-                android:layout_width="80dp" />
+                android:layout_width="80dp"
+                android:imeOptions="actionDone"/>
 
             <TextView
                 android:id="@+id/txtML3"
