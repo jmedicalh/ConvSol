@@ -98,8 +98,8 @@ public class FragmentResultado extends Fragment{
         calcular.setAmp(ModelSolucao.getInstance().getPorcentAmpola());
         calcular.setExist(ModelSolucao.getInstance().getPorcentExistente());
         //verifico volumes
-        int volJogarFora = 0;
-        int numBolsas = 0;
+        int volJogarFora;
+        int numBolsas;
         int volPrescrito = ModelSolucao.getInstance().getVolumePrescrito();
         int volExistente = ModelSolucao.getInstance().getVolumeExistente();
         if(volPrescrito < volExistente){

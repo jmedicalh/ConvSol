@@ -73,6 +73,9 @@ public class FragmentPrescricao extends Fragment {
 
     }
 
+    /**
+     * Metodo em que seto os valores contidos no modelo devolta nos campos
+     */
     public void carregaValores(){
         txtPorcento.setText(String.valueOf( ModelSolucao.getInstance().getPorcentPrescrito()));
         txtVolume.setText(String.valueOf(ModelSolucao.getInstance().getVolumePrescrito()));

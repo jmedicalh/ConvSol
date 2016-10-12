@@ -64,6 +64,10 @@ public class FragmentExistente extends Fragment {
         });
 
     }
+
+    /**
+     * Metodo em que seto os valores contidos no modelo devolta nos campos
+     */
     public void carregaValores(){
         txtPorcento.setText(String.valueOf( ModelSolucao.getInstance().getPorcentExistente()));
         txtVolume.setText(String.valueOf(ModelSolucao.getInstance().getVolumeExistente()));
