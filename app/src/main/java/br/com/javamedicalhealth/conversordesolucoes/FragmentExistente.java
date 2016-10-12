@@ -35,6 +35,8 @@ public class FragmentExistente extends Fragment {
         txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoExistente);
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
+        //recarrego os valores devolta nos campos
+        carregaValores();
 
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -60,6 +62,11 @@ public class FragmentExistente extends Fragment {
                 }
             }
         });
-    }
 
+    }
+    public void carregaValores(){
+        txtPorcento.setText(String.valueOf( ModelSolucao.getInstance().getPorcentExistente()));
+        txtVolume.setText(String.valueOf(ModelSolucao.getInstance().getVolumeExistente()));
+        spnTipo.setSelection(ModelSolucao.getInstance().getTipoExistente());
+    }
 }

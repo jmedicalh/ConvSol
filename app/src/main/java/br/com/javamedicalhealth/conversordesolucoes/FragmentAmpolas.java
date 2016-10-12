@@ -34,7 +34,8 @@ public class FragmentAmpolas extends Fragment {
         txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoAmpola);
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeAmpola);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnAmpola);
-
+        //carrego os valores devolta nos campos
+        carregaValores();
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -59,6 +60,12 @@ public class FragmentAmpolas extends Fragment {
                 }
             }
         });
+
     }
 
+    public void carregaValores(){
+        txtPorcento.setText(String.valueOf( ModelSolucao.getInstance().getPorcentAmpola()));
+        txtVolume.setText(String.valueOf(ModelSolucao.getInstance().getVolumeAmpola()));
+        spnTipo.setSelection(ModelSolucao.getInstance().getTipoAmpola());
+    }
 }
