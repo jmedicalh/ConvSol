@@ -39,6 +39,8 @@ public class FragmentPrescricao extends Fragment {
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumePrescrito);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnPrescrito);
 
+        //carrego os valores salvos
+        carregaValores();
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
