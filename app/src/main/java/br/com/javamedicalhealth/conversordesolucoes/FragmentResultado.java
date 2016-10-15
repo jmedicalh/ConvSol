@@ -46,6 +46,8 @@ public class FragmentResultado extends Fragment{
         if(mAdView != null){
             mAdView.resume();
         }
+        //calculo o soro
+        calcularSoro();
     }
 
     @Override
