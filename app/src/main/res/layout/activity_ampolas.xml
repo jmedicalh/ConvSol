@@ -39,7 +39,7 @@
                 android:ems="3"
                 android:id="@+id/txtPorcentoAmpola"
                 android:digits="1234567890."
-                android:maxLength="3"
+                android:maxLength="4"
                 android:text="@string/zero"
                 android:freezesText="true"
                 android:layout_width="fill_parent"
