@@ -33,15 +33,16 @@ public class FragmentExistente extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoExistente);
+        txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
+        spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
+
         if(savedInstanceState != null){
             txtPorcento.setText(String.valueOf( savedInstanceState.getSerializable("txtPorcento")));
             txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
         }
         super.onActivityCreated(savedInstanceState);
-        txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoExistente);
-        txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
-        spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
 
         //trabalhdando com o modelo
         MainActivity mainActivity = (MainActivity)getActivity();
