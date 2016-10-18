@@ -1,5 +1,6 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -32,8 +33,6 @@ public class FragmentResultado extends Fragment{
 
     //para o calculo
     CalculoConversao calcular = new CalculoConversao();
-
-    SharedPreferences.Editor preferences;
 
     private AdView mAdView;
 
@@ -77,7 +76,6 @@ public class FragmentResultado extends Fragment{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        preferences = this.getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         txtLinha1 = (TextView)getActivity().findViewById(R.id.txtMenssagem);
         txtLinha2 = (TextView)getActivity().findViewById(R.id.txtMenssagem2);
@@ -104,16 +102,17 @@ public class FragmentResultado extends Fragment{
     }
 
     private void calcularSoro(){
-        //prefs.getFloat("porcentPrescrito", 0f)
+        Context context = getActivity();
+        SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-        calcular.setPM(modelSolucao.getPorcentPrescrito());
-        calcular.setAmp(modelSolucao.getPorcentAmpola());
-        calcular.setExist(modelSolucao.getPorcentExistente());
+        calcular.setPM(prefs.getFloat("porcentPrescrito", 0f));
+        calcular.setAmp(prefs.getFloat("porcentAmpola", 0f));
+        calcular.setExist(prefs.getFloat("porcentExistente", 0f));
         //verifico volumes
         int volJogarFora;
         int numBolsas;
-        int volPrescrito = modelSolucao.getVolumePrescrito();
-        int volExistente = modelSolucao.getVolumeExistente();
+        int volPrescrito = prefs.getInt("volumePrescrito", 0);
+        int volExistente = prefs.getInt("volumeExistente", 0);
         if(volPrescrito < volExistente){
             volJogarFora = volExistente - volPrescrito;
             calcular.setVolume(volPrescrito);
@@ -126,7 +125,7 @@ public class FragmentResultado extends Fragment{
         Resources resources = getResources();
         String [] tipoAmpola = resources.getStringArray(R.array.ampola);
 
-        setResultado(calcular.Calcula(), tipoAmpola[modelSolucao.getTipoAmpola()], Integer.toString(numBolsas), volJogarFora);
+        setResultado(calcular.Calcula(), tipoAmpola[prefs.getInt("tipoAmpola", 0)], Integer.toString(numBolsas), volJogarFora);
 
     }
 
