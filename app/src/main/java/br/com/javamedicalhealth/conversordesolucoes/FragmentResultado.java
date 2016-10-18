@@ -28,6 +28,8 @@ public class FragmentResultado extends Fragment{
 
     //para o calculo
     CalculoConversao calcular = new CalculoConversao();
+    //modelo
+    ModelSolucao modelSolucao;
 
     private AdView mAdView;
 
@@ -96,14 +98,14 @@ public class FragmentResultado extends Fragment{
     }
 
     private void calcularSoro(){
-        calcular.setPM(ModelSolucao.getInstance().getPorcentPrescrito());
-        calcular.setAmp(ModelSolucao.getInstance().getPorcentAmpola());
-        calcular.setExist(ModelSolucao.getInstance().getPorcentExistente());
+        calcular.setPM(modelSolucao.getPorcentPrescrito());
+        calcular.setAmp(modelSolucao.getPorcentAmpola());
+        calcular.setExist(modelSolucao.getPorcentExistente());
         //verifico volumes
         int volJogarFora;
         int numBolsas;
-        int volPrescrito = ModelSolucao.getInstance().getVolumePrescrito();
-        int volExistente = ModelSolucao.getInstance().getVolumeExistente();
+        int volPrescrito = modelSolucao.getVolumePrescrito();
+        int volExistente = modelSolucao.getVolumeExistente();
         if(volPrescrito < volExistente){
             volJogarFora = volExistente - volPrescrito;
             calcular.setVolume(volPrescrito);
@@ -116,7 +118,7 @@ public class FragmentResultado extends Fragment{
         Resources resources = getResources();
         String [] tipoAmpola = resources.getStringArray(R.array.ampola);
 
-        setResultado(calcular.Calcula(), tipoAmpola[ModelSolucao.getInstance().getTipoAmpola()], Integer.toString(numBolsas), volJogarFora);
+        setResultado(calcular.Calcula(), tipoAmpola[modelSolucao.getTipoAmpola()], Integer.toString(numBolsas), volJogarFora);
 
     }
 
