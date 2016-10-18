@@ -1,5 +1,6 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 
 import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
+import static android.content.Context.MODE_PRIVATE;
+import static br.com.javamedicalhealth.conversordesolucoes.MainActivity.MY_PREFS_NAME;
+
 /**
  * Created by isaac on 06/10/16.
  */
@@ -22,7 +26,7 @@ public class FragmentAmpolas extends Fragment {
     private TextView txtVolume;
     private Spinner spnTipo;
 
-    ModelSolucao modelSolucao = null;
+    SharedPreferences.Editor preferences;
 
     @Nullable
     @Override
@@ -34,6 +38,8 @@ public class FragmentAmpolas extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        preferences = this.getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
         txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoAmpola);
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeAmpola);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnAmpola);
@@ -46,10 +52,6 @@ public class FragmentAmpolas extends Fragment {
         }
         super.onActivityCreated(savedInstanceState);
 
-        //trabalhdando com o modelo
-        MainActivity mainActivity = (MainActivity)getActivity();
-        modelSolucao = mainActivity.getModelSolucao();
-
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -58,7 +60,12 @@ public class FragmentAmpolas extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    modelSolucao.setPorcentAmpola(Float.parseFloat(txtPorcento.getText().toString()));
+                    String v = txtPorcento.getText().toString();
+                    if(v.indexOf(".") == 0){
+                        v = "0" + v;
+                        txtPorcento.setText(v);
+                    }
+                    preferences.putFloat("porcentAmpola", Float.parseFloat( txtPorcento.getText().toString()));
                 }
             }
         });
@@ -70,7 +77,7 @@ public class FragmentAmpolas extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    modelSolucao.setVolumeAmpola(Integer.parseInt(txtVolume.getText().toString()));
+                    preferences.putInt("volumeAmpola", Integer.parseInt(txtVolume.getText().toString()));
                 }
             }
         });
@@ -78,7 +85,7 @@ public class FragmentAmpolas extends Fragment {
         spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                modelSolucao.setTipoAmpola(i);
+                preferences.putInt("tipoAmpola", i);
             }
 
             @Override
@@ -94,8 +101,6 @@ public class FragmentAmpolas extends Fragment {
         outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
         outState.putSerializable("txtVolume", txtVolume.getText().toString());
         outState.putSerializable("txtPorcento", txtPorcento.getText().toString());
-        MainActivity mainActivity = (MainActivity)getActivity();
-        mainActivity.setModelSolucao(modelSolucao);
         super.onSaveInstanceState(outState);
     }
 }
