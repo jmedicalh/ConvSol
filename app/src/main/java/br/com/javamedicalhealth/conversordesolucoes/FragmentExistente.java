@@ -1,5 +1,6 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 
 import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
+import static android.content.Context.MODE_PRIVATE;
+import static br.com.javamedicalhealth.conversordesolucoes.MainActivity.MY_PREFS_NAME;
+
 /**
  * Created by isaac on 06/10/16.
  */
@@ -22,7 +26,8 @@ public class FragmentExistente extends Fragment {
     private TextView txtVolume;
     private Spinner spnTipo;
 
-    ModelSolucao modelSolucao;
+    SharedPreferences.Editor preferences;
+
 
     @Nullable
     @Override
@@ -33,6 +38,8 @@ public class FragmentExistente extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        preferences = this.getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
         txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoExistente);
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
@@ -44,9 +51,6 @@ public class FragmentExistente extends Fragment {
         }
         super.onActivityCreated(savedInstanceState);
 
-        //trabalhdando com o modelo
-        MainActivity mainActivity = (MainActivity)getActivity();
-        modelSolucao = mainActivity.getModelSolucao();
 
 
         //validações dos campos onleave
@@ -57,7 +61,7 @@ public class FragmentExistente extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    modelSolucao.setPorcentExistente(Float.parseFloat(txtPorcento.getText().toString()));
+                    preferences.putFloat("porcentExistente", Float.parseFloat( txtPorcento.getText().toString()));
                 }
             }
         });
@@ -69,7 +73,7 @@ public class FragmentExistente extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    modelSolucao.setVolumeExistente(Integer.parseInt(txtVolume.getText().toString()));
+                    preferences.putInt("volumeExistente", Integer.parseInt(txtVolume.getText().toString()));
                 }
             }
         });
@@ -77,7 +81,7 @@ public class FragmentExistente extends Fragment {
         spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                modelSolucao.setTipoExistente(i);
+                preferences.putInt("tipoExistente", i);
             }
 
             @Override
@@ -92,8 +96,6 @@ public class FragmentExistente extends Fragment {
         outState.putSerializable("txtPorcento", txtPorcento.getText().toString());
         outState.putSerializable("txtVolume", txtVolume.getText().toString());
         outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
-        MainActivity mainActivity = (MainActivity)getActivity();
-        mainActivity.setModelSolucao(modelSolucao);
         super.onSaveInstanceState(outState);
     }
 }
