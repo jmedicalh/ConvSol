@@ -111,4 +111,8 @@ public class MainActivity extends AppCompatActivity {
     public ModelSolucao getModelSolucao(){
         return this.modelSolucao;
     }
+
+    public void setModelSolucao(ModelSolucao modelSolucao){
+        this.modelSolucao = modelSolucao;
+    }
 }
