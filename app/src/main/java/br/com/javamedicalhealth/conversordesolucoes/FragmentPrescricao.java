@@ -57,11 +57,11 @@ public class FragmentPrescricao extends Fragment {
             Context context = getActivity();
             SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
-            txtPorcento.setText(String.valueOf(prefs.getFloat("porcentAmpola", 0f)));
+            txtPorcento.setText(String.valueOf(prefs.getFloat("porcentPrescrito", 0f)));
 
-            txtVolume.setText(String.valueOf(prefs.getInt("volumeAmpola", 0)));
+            txtVolume.setText(String.valueOf(prefs.getInt("volumePrescrito", 0)));
 
-            spnTipo.setSelection(prefs.getInt("tipoAmpola", 0));
+            spnTipo.setSelection(prefs.getInt("tipoPrescrito", 0));
         }
 
 
@@ -79,9 +79,11 @@ public class FragmentPrescricao extends Fragment {
                     String v = txtPorcento.getText().toString();
                     if(v.indexOf(".") == 0){
                         v = "0" + v;
-                        txtPorcento.setText(v);
+                    }else {
+                        v += "0";
                     }
-                    preferences.putFloat("porcentPrescrito", Float.parseFloat( txtPorcento.getText().toString()));
+                    txtPorcento.setText(v);
+                    salvaValores();
                 }
             }
         });
@@ -93,7 +95,7 @@ public class FragmentPrescricao extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    preferences.putInt("volumePrescrito", Integer.parseInt(txtVolume.getText().toString()));
+                    salvaValores();
                 }
             }
         });
@@ -101,7 +103,7 @@ public class FragmentPrescricao extends Fragment {
         spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                preferences.putInt("tipoPrescrito", i);
+                salvaValores();
             }
 
             @Override
@@ -109,7 +111,6 @@ public class FragmentPrescricao extends Fragment {
 
             }
         });
-        preferences.commit();
     }
 
     @Override
@@ -118,5 +119,28 @@ public class FragmentPrescricao extends Fragment {
         outState.putSerializable("txtVolume", txtVolume.getText().toString());
         outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    @Override
+    public void onPause() {
+        salvaValores();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        salvaValores();
+        super.onDestroy();
+    }
+
+    private void salvaValores(){
+        preferences.putFloat("porcentPrescrito", Float.parseFloat( txtPorcento.getText().toString()));
+        preferences.putInt("volumePrescrito", Integer.parseInt(txtVolume.getText().toString()));
+        preferences.putInt("tipoPrescrito", spnTipo.getSelectedItemPosition());
+        preferences.commit();
     }
 }
