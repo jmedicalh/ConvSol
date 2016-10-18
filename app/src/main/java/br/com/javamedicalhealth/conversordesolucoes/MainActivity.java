@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         /*fim da inicialização da propaganda*/
         //caso nao tenha dado la dentro gero a sharedpreferences
-
+        setaValoresNasPreferencias();
     }
 
     //para propaganda rodar corretamente
