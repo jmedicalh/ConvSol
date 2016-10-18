@@ -1,5 +1,6 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,9 @@ import com.google.android.gms.ads.AdView;
 import br.com.javamedicalhealth.conversordesolucoes.conversor.CalculoConversao;
 import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
+import static android.content.Context.MODE_PRIVATE;
+import static br.com.javamedicalhealth.conversordesolucoes.MainActivity.MY_PREFS_NAME;
+
 /**
  * Created by isaac on 10/10/16.
  */
@@ -28,6 +32,8 @@ public class FragmentResultado extends Fragment{
 
     //para o calculo
     CalculoConversao calcular = new CalculoConversao();
+
+    SharedPreferences.Editor preferences;
 
     private AdView mAdView;
 
@@ -71,6 +77,8 @@ public class FragmentResultado extends Fragment{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        preferences = this.getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
         txtLinha1 = (TextView)getActivity().findViewById(R.id.txtMenssagem);
         txtLinha2 = (TextView)getActivity().findViewById(R.id.txtMenssagem2);
         button = (Button) getActivity().findViewById(R.id.cmdOK);
@@ -96,6 +104,8 @@ public class FragmentResultado extends Fragment{
     }
 
     private void calcularSoro(){
+        //prefs.getFloat("porcentPrescrito", 0f)
+
         calcular.setPM(modelSolucao.getPorcentPrescrito());
         calcular.setAmp(modelSolucao.getPorcentAmpola());
         calcular.setExist(modelSolucao.getPorcentExistente());
