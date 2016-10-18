@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     FragmentBotao botao = new FragmentBotao();
     FragmentResultado resultado = new FragmentResultado();
 
+    //modelo
+    private ModelSolucao modelSolucao;
     //propaganda
     private AdView mAdView;
 
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(savedInstanceState == null){
             inflaFragmentos();
+            modelSolucao = new ModelSolucao();
         }
         //para propaganda trabalhar
         mAdView = (AdView) findViewById(R.id.adView);
@@ -103,5 +106,9 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragBotao, botao, "fragBotao")
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public ModelSolucao getModelSolucao(){
+        return this.modelSolucao;
     }
 }
