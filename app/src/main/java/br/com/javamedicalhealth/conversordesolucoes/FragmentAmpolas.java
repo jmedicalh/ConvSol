@@ -47,11 +47,8 @@ public class FragmentAmpolas extends Fragment {
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnAmpola);
 
         //trabalhdando com o modelo
-        if(modelSolucao == null){
-            MainActivity mainActivity = (MainActivity)getActivity();
-            modelSolucao = mainActivity.getModelSolucao();
-        }
-
+        MainActivity mainActivity = (MainActivity)getActivity();
+        modelSolucao = mainActivity.getModelSolucao();
 
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -97,6 +94,8 @@ public class FragmentAmpolas extends Fragment {
         outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
         outState.putSerializable("txtVolume", txtVolume.getText().toString());
         outState.putSerializable("txtPorcento", txtPorcento.getText().toString());
+        MainActivity mainActivity = (MainActivity)getActivity();
+        mainActivity.setModelSolucao(modelSolucao);
         super.onSaveInstanceState(outState);
     }
 }
