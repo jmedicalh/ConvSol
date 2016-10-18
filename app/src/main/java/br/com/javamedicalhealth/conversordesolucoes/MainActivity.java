@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentBotao botao = new FragmentBotao();
     FragmentResultado resultado = new FragmentResultado();
 
-    //modelo
-    private ModelSolucao modelSolucao;
     //propaganda
     private AdView mAdView;
     //para SharedPreferences
@@ -89,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragBotao, botao, "fragBotao")
                 .addToBackStack(null)
                 .commit();
-
-        setaValoresNasPreferencias();
     }
 
 
@@ -117,17 +113,4 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void setaValoresNasPreferencias(){
-
-        preferences.putInt("tipoPrescrito", 0);
-        preferences.putFloat("porcentPrescrito", 0f);
-        preferences.putInt("volumePrescrito", 0);
-        preferences.putInt("tipoExistente", 0);
-        preferences.putFloat("porcentExistente", 0f);
-        preferences.putInt("volumeExistente",0);
-        preferences.putInt("tipoAmpola",0);
-        preferences.putFloat("porcentAmpola",0f);
-        preferences.putInt("volumeAmpola",0);
-        preferences.commit();
-    }
 }
