@@ -104,8 +104,6 @@ public class FragmentPrescricao extends Fragment {
         outState.putSerializable("txtPorcento", txtPorcento.getText().toString());
         outState.putSerializable("txtVolume", txtVolume.getText().toString());
         outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
-        MainActivity mainActivity = (MainActivity)getActivity();
-        mainActivity.setModelSolucao(modelSolucao);
         super.onSaveInstanceState(outState);
     }
 }
