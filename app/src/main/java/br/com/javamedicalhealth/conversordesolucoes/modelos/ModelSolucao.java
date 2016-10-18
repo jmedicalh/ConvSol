@@ -7,8 +7,6 @@ package br.com.javamedicalhealth.conversordesolucoes.modelos;
 
 public class ModelSolucao {
 
-    private static ModelSolucao mInstance = null;
-
     //prescrito
     int tipoPrescrito;
     float porcentPrescrito;
@@ -32,13 +30,6 @@ public class ModelSolucao {
         tipoAmpola = 0;
         porcentAmpola = 0f;
         volumeAmpola = 0;
-    }
-
-    public static synchronized ModelSolucao getInstance (){
-        if(mInstance == null){
-            mInstance = new ModelSolucao();
-        }
-        return  mInstance;
     }
 
     public int getVolumeAmpola() {
