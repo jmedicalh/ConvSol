@@ -75,7 +75,7 @@ public class FragmentPrescricao extends Fragment {
                     String v = txtPorcento.getText().toString();
                     if(v.indexOf(".") == 0){
                         v = "0" + v;
-                    }else {
+                    }else if(v.endsWith(".")){
                         v += "0";
                     }
                     txtPorcento.setText(v);
