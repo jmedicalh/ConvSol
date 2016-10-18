@@ -64,10 +64,6 @@ public class FragmentPrescricao extends Fragment {
             spnTipo.setSelection(prefs.getInt("tipoPrescrito", 0));
         }
 
-
-
-
-
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
