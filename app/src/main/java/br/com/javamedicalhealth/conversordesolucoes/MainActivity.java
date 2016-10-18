@@ -1,5 +1,6 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private ModelSolucao modelSolucao;
     //propaganda
     private AdView mAdView;
+    //para SharedPreferences
+    public static final String MY_PREFS_NAME = "PrefsFile";
+    SharedPreferences.Editor preferences = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mAdView.loadAd(adRequest);
         /*fim da inicialização da propaganda*/
+        //caso nao tenha dado la dentro gero a sharedpreferences
+
     }
 
     //para propaganda rodar corretamente
@@ -114,5 +120,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void setModelSolucao(ModelSolucao modelSolucao){
         this.modelSolucao = modelSolucao;
+    }
+
+    public void setaValoresNasPreferencias(){
+        preferences.putInt("tipoPrescrito", 0);
+        preferences.putFloat("porcentPrescrito", 0f);
+        preferences.putInt("volumePrescrito", 0);
+        preferences.putInt("tipoExistente", 0);
+        preferences.putFloat("porcentExistente", 0f);
+        preferences.putInt("volumeExistente",0);
+        preferences.putInt("tipoAmpola",0);
+        preferences.putFloat("porcentAmpola",0f);
+        preferences.putInt("volumeAmpola",0);
     }
 }
