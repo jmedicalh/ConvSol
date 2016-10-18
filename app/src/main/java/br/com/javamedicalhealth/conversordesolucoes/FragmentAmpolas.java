@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,13 +22,14 @@ public class FragmentAmpolas extends Fragment {
     private TextView txtVolume;
     private Spinner spnTipo;
 
-    ModelSolucao modelSolucao;
+    ModelSolucao modelSolucao = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_ampolas, container, false);
         return view;
+
     }
 
     @Override
@@ -39,9 +41,17 @@ public class FragmentAmpolas extends Fragment {
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
         }
         super.onActivityCreated(savedInstanceState);
+
         txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoAmpola);
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeAmpola);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnAmpola);
+
+        //trabalhdando com o modelo
+        if(modelSolucao == null){
+            MainActivity mainActivity = (MainActivity)getActivity();
+            modelSolucao = mainActivity.getModelSolucao();
+        }
+
 
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -65,6 +75,18 @@ public class FragmentAmpolas extends Fragment {
                     }
                     modelSolucao.setVolumeAmpola(Integer.parseInt(txtVolume.getText().toString()));
                 }
+            }
+        });
+
+        spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                modelSolucao.setTipoAmpola(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
