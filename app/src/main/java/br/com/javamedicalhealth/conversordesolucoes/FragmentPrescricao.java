@@ -47,6 +47,10 @@ public class FragmentPrescricao extends Fragment {
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumePrescrito);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnPrescrito);
 
+        //trabalhdando com o modelo
+        MainActivity mainActivity = (MainActivity)getActivity();
+        modelSolucao = mainActivity.getModelSolucao();
+
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
