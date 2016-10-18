@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -69,6 +70,18 @@ public class FragmentExistente extends Fragment {
                     }
                     modelSolucao.setVolumeExistente(Integer.parseInt(txtVolume.getText().toString()));
                 }
+            }
+        });
+
+        spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                modelSolucao.setTipoAmpola(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
