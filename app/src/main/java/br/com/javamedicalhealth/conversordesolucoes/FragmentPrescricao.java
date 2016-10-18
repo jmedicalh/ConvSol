@@ -1,5 +1,6 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -46,12 +47,23 @@ public class FragmentPrescricao extends Fragment {
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumePrescrito);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnPrescrito);
 
+        super.onActivityCreated(savedInstanceState);
+
         if(savedInstanceState != null){
             txtPorcento.setText(String.valueOf(savedInstanceState.getSerializable("txtPorcento")));
             txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
+        } else {
+            Context context = getActivity();
+            SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
+            txtPorcento.setText(String.valueOf(prefs.getFloat("porcentAmpola", 0f)));
+
+            txtVolume.setText(String.valueOf(prefs.getInt("volumeAmpola", 0)));
+
+            spnTipo.setSelection(prefs.getInt("tipoAmpola", 0));
         }
-        super.onActivityCreated(savedInstanceState);
+
 
 
 
