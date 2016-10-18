@@ -20,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentBotao botao = new FragmentBotao();
     FragmentResultado resultado = new FragmentResultado();
 
-    //modelo
-    ModelSolucao modelo;
-
-
     //propaganda
     private AdView mAdView;
 
@@ -45,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mAdView.loadAd(adRequest);
         /*fim da inicialização da propaganda*/
-
-        //inicializo o singleton;
-        //modelo = ModelSolucao().getInstance();
     }
 
     //para propaganda rodar corretamente
