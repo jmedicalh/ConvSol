@@ -28,8 +28,6 @@ public class FragmentResultado extends Fragment{
 
     //para o calculo
     CalculoConversao calcular = new CalculoConversao();
-    //modelo
-    ModelSolucao modelSolucao;
 
     private AdView mAdView;
 
