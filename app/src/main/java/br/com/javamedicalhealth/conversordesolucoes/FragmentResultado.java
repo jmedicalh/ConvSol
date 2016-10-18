@@ -73,10 +73,6 @@ public class FragmentResultado extends Fragment{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        //trabalhdando com o modelo
-        MainActivity mainActivity = (MainActivity)getActivity();
-        modelSolucao = mainActivity.getModelSolucao();
-
         txtLinha1 = (TextView)getActivity().findViewById(R.id.txtMenssagem);
         txtLinha2 = (TextView)getActivity().findViewById(R.id.txtMenssagem2);
         button = (Button) getActivity().findViewById(R.id.cmdOK);

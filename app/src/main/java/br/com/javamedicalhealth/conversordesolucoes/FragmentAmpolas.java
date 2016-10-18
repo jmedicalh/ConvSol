@@ -93,7 +93,7 @@ public class FragmentAmpolas extends Fragment {
 
             }
         });
-
+        preferences.commit();
     }
 
     @Override

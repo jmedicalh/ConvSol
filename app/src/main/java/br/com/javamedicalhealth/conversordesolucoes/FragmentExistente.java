@@ -89,6 +89,7 @@ public class FragmentExistente extends Fragment {
 
             }
         });
+        preferences.commit();
     }
 
     @Override

@@ -27,16 +27,16 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     //para SharedPreferences
     public static final String MY_PREFS_NAME = "PrefsFile";
-    SharedPreferences.Editor preferences = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+    public SharedPreferences.Editor preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preferences = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         if(savedInstanceState == null){
             inflaFragmentos();
-            modelSolucao = new ModelSolucao();
         }
         //para propaganda trabalhar
         mAdView = (AdView) findViewById(R.id.adView);
@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         /*fim da inicialização da propaganda*/
         //caso nao tenha dado la dentro gero a sharedpreferences
-        setaValoresNasPreferencias();
+
+
     }
 
     //para propaganda rodar corretamente
@@ -88,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragBotao, botao, "fragBotao")
                 .addToBackStack(null)
                 .commit();
+
+        setaValoresNasPreferencias();
     }
 
 
@@ -114,15 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public ModelSolucao getModelSolucao(){
-        return this.modelSolucao;
-    }
-
-    public void setModelSolucao(ModelSolucao modelSolucao){
-        this.modelSolucao = modelSolucao;
-    }
-
     public void setaValoresNasPreferencias(){
+
         preferences.putInt("tipoPrescrito", 0);
         preferences.putFloat("porcentPrescrito", 0f);
         preferences.putInt("volumePrescrito", 0);
@@ -132,5 +128,6 @@ public class MainActivity extends AppCompatActivity {
         preferences.putInt("tipoAmpola",0);
         preferences.putFloat("porcentAmpola",0f);
         preferences.putInt("volumeAmpola",0);
+        preferences.commit();
     }
 }

@@ -97,6 +97,7 @@ public class FragmentPrescricao extends Fragment {
 
             }
         });
+        preferences.commit();
     }
 
     @Override
