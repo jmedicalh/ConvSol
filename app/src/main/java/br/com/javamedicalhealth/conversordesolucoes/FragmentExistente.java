@@ -21,6 +21,7 @@ public class FragmentExistente extends Fragment {
     private TextView txtVolume;
     private Spinner spnTipo;
 
+    ModelSolucao modelSolucao;
 
     @Nullable
     @Override
@@ -31,12 +32,15 @@ public class FragmentExistente extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            txtPorcento.setText(String.valueOf( savedInstanceState.getSerializable("txtPorcento")));
+            txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
+            spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
+        }
         super.onActivityCreated(savedInstanceState);
         txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoExistente);
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
-        //recarrego os valores devolta nos campos
-        carregaValores();
 
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -46,7 +50,7 @@ public class FragmentExistente extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    ModelSolucao.getInstance().setPorcentExistente(Float.parseFloat(txtPorcento.getText().toString()));
+                    modelSolucao.setPorcentExistente(Float.parseFloat(txtPorcento.getText().toString()));
                 }
             }
         });
@@ -58,19 +62,10 @@ public class FragmentExistente extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    ModelSolucao.getInstance().setVolumeExistente(Integer.parseInt(txtVolume.getText().toString()));
+                    modelSolucao.setVolumeExistente(Integer.parseInt(txtVolume.getText().toString()));
                 }
             }
         });
 
-    }
-
-    /**
-     * Metodo em que seto os valores contidos no modelo devolta nos campos
-     */
-    public void carregaValores(){
-        txtPorcento.setText(String.valueOf( ModelSolucao.getInstance().getPorcentExistente()));
-        txtVolume.setText(String.valueOf(ModelSolucao.getInstance().getVolumeExistente()));
-        spnTipo.setSelection(ModelSolucao.getInstance().getTipoExistente());
     }
 }

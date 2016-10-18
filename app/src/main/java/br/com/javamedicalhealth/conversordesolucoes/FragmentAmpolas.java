@@ -21,6 +21,8 @@ public class FragmentAmpolas extends Fragment {
     private TextView txtVolume;
     private Spinner spnTipo;
 
+    ModelSolucao modelSolucao;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,12 +32,17 @@ public class FragmentAmpolas extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        //verificando caso tenha algo guardado para mudança de posicionamento
+        if(savedInstanceState != null){
+            txtPorcento.setText(String.valueOf( savedInstanceState.getSerializable("txtPorcento")));
+            txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
+            spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
+        }
         super.onActivityCreated(savedInstanceState);
         txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoAmpola);
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeAmpola);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnAmpola);
-        //carrego os valores devolta nos campos
-        carregaValores();
+
         //validações dos campos onleave
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -44,7 +51,7 @@ public class FragmentAmpolas extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    ModelSolucao.getInstance().setPorcentAmpola(Float.parseFloat(txtPorcento.getText().toString()));
+                    modelSolucao.setPorcentAmpola(Float.parseFloat(txtPorcento.getText().toString()));
                 }
             }
         });
@@ -56,19 +63,18 @@ public class FragmentAmpolas extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    ModelSolucao.getInstance().setVolumeAmpola(Integer.parseInt(txtVolume.getText().toString()));
+                    modelSolucao.setVolumeAmpola(Integer.parseInt(txtVolume.getText().toString()));
                 }
             }
         });
 
     }
 
-    /**
-     * Metodo em que seto os valores contidos no modelo devolta nos campos
-     */
-    public void carregaValores(){
-        txtPorcento.setText(String.valueOf( ModelSolucao.getInstance().getPorcentAmpola()));
-        txtVolume.setText(String.valueOf(ModelSolucao.getInstance().getVolumeAmpola()));
-        spnTipo.setSelection(ModelSolucao.getInstance().getTipoAmpola());
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
+        outState.putSerializable("txtVolume", txtVolume.getText().toString());
+        outState.putSerializable("txtPorcento", txtPorcento.getText().toString());
+        super.onSaveInstanceState(outState);
     }
 }
