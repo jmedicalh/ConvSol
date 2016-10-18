@@ -1,5 +1,6 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,13 +45,22 @@ public class FragmentExistente extends Fragment {
         txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
 
-        if(savedInstanceState != null){
-            txtPorcento.setText(String.valueOf( savedInstanceState.getSerializable("txtPorcento")));
-            txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
-            spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
-        }
         super.onActivityCreated(savedInstanceState);
 
+        if(savedInstanceState != null){
+            txtPorcento.setText(String.valueOf(savedInstanceState.getSerializable("txtPorcento")));
+            txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
+            spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
+        } else {
+            Context context = getActivity();
+            SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
+            txtPorcento.setText(String.valueOf(prefs.getFloat("porcentExistente", 0f)));
+
+            txtVolume.setText(String.valueOf(prefs.getInt("volumeExistente", 0)));
+
+            spnTipo.setSelection(prefs.getInt("tipoExistente", 0));
+        }
 
 
         //validações dos campos onleave
@@ -61,10 +71,18 @@ public class FragmentExistente extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    preferences.putFloat("porcentExistente", Float.parseFloat( txtPorcento.getText().toString()));
+                    String v = txtPorcento.getText().toString();
+                    if(v.indexOf(".") == 0){
+                        v = "0" + v;
+                    }else {
+                        v += "0";
+                    }
+                    txtPorcento.setText(v);
+                    salvaValores();
                 }
             }
         });
+
 
         txtVolume.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -73,7 +91,7 @@ public class FragmentExistente extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    preferences.putInt("volumeExistente", Integer.parseInt(txtVolume.getText().toString()));
+                    salvaValores();
                 }
             }
         });
@@ -81,7 +99,7 @@ public class FragmentExistente extends Fragment {
         spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                preferences.putInt("tipoExistente", i);
+                salvaValores();
             }
 
             @Override
@@ -98,5 +116,28 @@ public class FragmentExistente extends Fragment {
         outState.putSerializable("txtVolume", txtVolume.getText().toString());
         outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    @Override
+    public void onPause() {
+        salvaValores();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        salvaValores();
+        super.onDestroy();
+    }
+
+    private void salvaValores(){
+        preferences.putFloat("porcentExistente", Float.parseFloat( txtPorcento.getText().toString()));
+        preferences.putInt("volumeExistente", Integer.parseInt(txtVolume.getText().toString()));
+        preferences.putInt("tipoExistente", spnTipo.getSelectedItemPosition());
+        preferences.commit();
     }
 }
