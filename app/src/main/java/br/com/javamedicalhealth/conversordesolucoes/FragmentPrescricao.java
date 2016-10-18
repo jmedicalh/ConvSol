@@ -69,7 +69,7 @@ public class FragmentPrescricao extends Fragment {
                         v = "0" + v;
                         txtPorcento.setText(v);
                     }
-                    modelSolucao.setPorcentPrescrito(Float.parseFloat( txtPorcento.getText().toString()));
+                    preferences.putFloat("porcentPrescrito", Float.parseFloat( txtPorcento.getText().toString()));
                 }
             }
         });
@@ -81,7 +81,7 @@ public class FragmentPrescricao extends Fragment {
                     if(txtVolume.getTextSize() < 1){
                         txtVolume.setText("0");
                     }
-                    modelSolucao.setVolumePrescrito(Integer.parseInt(txtVolume.getText().toString()));
+                    preferences.putInt("volumePrescrito", Integer.parseInt(txtVolume.getText().toString()));
                 }
             }
         });
@@ -89,7 +89,7 @@ public class FragmentPrescricao extends Fragment {
         spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                modelSolucao.setTipoPrescrito(i);
+                preferences.putInt("tipoPrescrito", i);
             }
 
             @Override
