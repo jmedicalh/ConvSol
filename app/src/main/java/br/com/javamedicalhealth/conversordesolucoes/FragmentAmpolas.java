@@ -34,6 +34,10 @@ public class FragmentAmpolas extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoAmpola);
+        txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeAmpola);
+        spnTipo = (Spinner)getActivity().findViewById(R.id.spnAmpola);
+
         //verificando caso tenha algo guardado para mudança de posicionamento
         if(savedInstanceState != null){
             txtPorcento.setText(String.valueOf( savedInstanceState.getSerializable("txtPorcento")));
@@ -41,10 +45,6 @@ public class FragmentAmpolas extends Fragment {
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
         }
         super.onActivityCreated(savedInstanceState);
-
-        txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoAmpola);
-        txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeAmpola);
-        spnTipo = (Spinner)getActivity().findViewById(R.id.spnAmpola);
 
         //trabalhdando com o modelo
         MainActivity mainActivity = (MainActivity)getActivity();
