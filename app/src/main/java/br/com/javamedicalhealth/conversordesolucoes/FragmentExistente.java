@@ -66,6 +66,13 @@ public class FragmentExistente extends Fragment {
                 }
             }
         });
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("txtPorcento", txtPorcento.getText().toString());
+        outState.putSerializable("txtVolume", txtVolume.getText().toString());
+        outState.putSerializable("spnTipo", spnTipo.getSelectedItemPosition());
+        super.onSaveInstanceState(outState);
     }
 }
