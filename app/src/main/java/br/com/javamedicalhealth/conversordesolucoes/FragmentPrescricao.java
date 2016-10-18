@@ -37,15 +37,17 @@ public class FragmentPrescricao extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoPrescrito);
+        txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumePrescrito);
+        spnTipo = (Spinner)getActivity().findViewById(R.id.spnPrescrito);
+
         if(savedInstanceState != null){
             txtPorcento.setText(String.valueOf(savedInstanceState.getSerializable("txtPorcento")));
             txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
         }
         super.onActivityCreated(savedInstanceState);
-        txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoPrescrito);
-        txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumePrescrito);
-        spnTipo = (Spinner)getActivity().findViewById(R.id.spnPrescrito);
+
 
         //trabalhdando com o modelo
         MainActivity mainActivity = (MainActivity)getActivity();
