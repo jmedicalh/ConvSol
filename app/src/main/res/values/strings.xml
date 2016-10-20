@@ -30,4 +30,5 @@
     <string name="mlOu">ml ou </string>
     <string name="resultado">Resultado:</string>
     <string name="ok">OK</string>
+    <string name="osmolaridade">Valor da Osmolaridade</string>
 </resources>
