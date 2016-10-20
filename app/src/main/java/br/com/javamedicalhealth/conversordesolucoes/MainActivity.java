@@ -5,11 +5,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import br.com.javamedicalhealth.conversordesolucoes.conversor.CalculoOsmolaridade;
 import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         /*fim da inicialização da propaganda*/
         //caso nao tenha dado la dentro gero a sharedpreferences
 
+        Log.i("NACL", CalculoOsmolaridade.getNaCl().toString());
+        Log.i("GICOSE", CalculoOsmolaridade.getG().toString());
+
+        CalculoOsmolaridade calculoOsmolaridade = new CalculoOsmolaridade();
+        Log.i("RESULTADO - SF 0,9", calculoOsmolaridade.calculaOsmolaridade(0.9, "SF"));
+        Log.i("RESULTADO - SF 0,45", calculoOsmolaridade.calculaOsmolaridade(0.45, "SF"));
+        Log.i("RESULTADO - G 5", calculoOsmolaridade.calculaOsmolaridade(5.0, "G"));
+        Log.i("RESULTADO - G 10", calculoOsmolaridade.calculaOsmolaridade(10.0, "G"));
 
     }
 
