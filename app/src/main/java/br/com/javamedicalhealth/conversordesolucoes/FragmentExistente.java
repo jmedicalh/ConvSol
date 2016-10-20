@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import br.com.javamedicalhealth.conversordesolucoes.conversor.CalculoOsmolaridade;
 import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -92,6 +93,7 @@ public class FragmentExistente extends Fragment {
                         txtVolume.setText("0");
                     }
                     salvaValores();
+
                 }
             }
         });
@@ -139,5 +141,12 @@ public class FragmentExistente extends Fragment {
         preferences.putInt("volumeExistente", Integer.parseInt(txtVolume.getText().toString()));
         preferences.putInt("tipoExistente", spnTipo.getSelectedItemPosition());
         preferences.commit();
+    }
+
+    private void caculaOsmolaridade(double porcentagem, String tipo){
+        CalculoOsmolaridade calculoOsmolaridade = new CalculoOsmolaridade();
+        String valor = calculoOsmolaridade.calculaOsmolaridade(porcentagem, tipo);
+        TextView txtOsmolaridade = (TextView)getActivity().findViewById(R.id.txtOsmolaridade);
+        txtOsmolaridade.setText(txtOsmolaridade.getText() + " é de " + valor);
     }
 }
