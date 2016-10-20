@@ -67,5 +67,21 @@
                 android:text="@string/ml"
                 android:layout_width="wrap_content"/>
         </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="1dp">
+
+            <TextView
+                android:layout_span="5"
+                android:text="@string/osmolaridade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtPorcentoExistente"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="14dp"
+                android:id="@+id/txtOsmolaridade" />
+        </TableRow>
     </TableLayout>
 </RelativeLayout>
