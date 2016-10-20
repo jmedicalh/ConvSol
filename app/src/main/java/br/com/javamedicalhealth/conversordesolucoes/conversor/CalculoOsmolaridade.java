@@ -20,9 +20,9 @@ public class CalculoOsmolaridade {
 
     public String calculaOsmolaridade(Double porcentagem, String tipo){
         String t = "";
-        if(tipo == "SF")
+        if(tipo.equals("SF"))
             t = String.valueOf(( (porcentagem / 0.100) *( 1 / NaCl)) * 2 * 1000);
-        else if (tipo == "G")
+        else if (tipo.equals("G"))
             t = String.valueOf(( (porcentagem / 0.100) *( 1 / G)) * 1 * 1000);
         return  t;
     }
