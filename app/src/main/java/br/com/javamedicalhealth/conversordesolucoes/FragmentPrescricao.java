@@ -155,7 +155,7 @@ public class FragmentPrescricao extends Fragment {
         String osmolaridade = resources.getString(R.string.osmolaridade);
         CalculoOsmolaridade calculoOsmolaridade = new CalculoOsmolaridade();
         String valor = calculoOsmolaridade.calculaOsmolaridade(valorPorcento, strTipo);
-        TextView txtOsmolaridade = (TextView)getActivity().findViewById(R.id.txtOsmolaridade);
+        TextView txtOsmolaridade = (TextView)getActivity().findViewById(R.id.txtOsmolaridadePrescrito);
         txtOsmolaridade.setText(osmolaridade + " é de " + valor);
     }
 }
