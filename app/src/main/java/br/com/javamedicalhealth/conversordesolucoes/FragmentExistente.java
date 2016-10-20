@@ -31,7 +31,8 @@ public class FragmentExistente extends Fragment {
 
     SharedPreferences.Editor preferences;
 
-    String valorPorcento = "";
+    double valorPorcento = 0.0;
+    String strValorPorcento = "";
     String strTipo= "";
 
 
@@ -77,14 +78,15 @@ public class FragmentExistente extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    valorPorcento = txtPorcento.getText().toString();
-                    if(valorPorcento.indexOf(".") == 0){
-                        valorPorcento = "0" + valorPorcento;
-                    }else if(valorPorcento.endsWith(".")){
-                        valorPorcento += "0";
+                    strValorPorcento = txtPorcento.getText().toString();
+                    if(strValorPorcento.indexOf(".") == 0){
+                        strValorPorcento = "0" + strValorPorcento;
+                    }else if(strValorPorcento.endsWith(".")){
+                        strValorPorcento += "0";
                     }
-                    txtPorcento.setText(valorPorcento);
+                    txtPorcento.setText(strValorPorcento);
                     salvaValores();
+                    valorPorcento = Double.parseDouble(strValorPorcento);
                 }
             }
         });
@@ -98,8 +100,8 @@ public class FragmentExistente extends Fragment {
                         txtVolume.setText("0");
                     }
                     salvaValores();
-                    if(valorPorcento != ""){
-                        caculaOsmolaridade(Double.parseDouble(valorPorcento));
+                    if(strValorPorcento != ""){
+                        caculaOsmolaridade();
                     }
                 }
             }
@@ -151,11 +153,11 @@ public class FragmentExistente extends Fragment {
         preferences.commit();
     }
 
-    private void caculaOsmolaridade(double porcentagem){
+    private void caculaOsmolaridade(){
         Resources resources = getResources();
         String osmolaridade = resources.getString(R.string.osmolaridade);
         CalculoOsmolaridade calculoOsmolaridade = new CalculoOsmolaridade();
-        String valor = calculoOsmolaridade.calculaOsmolaridade(porcentagem, strTipo);
+        String valor = calculoOsmolaridade.calculaOsmolaridade(valorPorcento, strTipo);
         TextView txtOsmolaridade = (TextView)getActivity().findViewById(R.id.txtOsmolaridade);
         txtOsmolaridade.setText(osmolaridade + " é de " + valor);
     }
