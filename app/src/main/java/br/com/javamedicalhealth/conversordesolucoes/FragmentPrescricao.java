@@ -31,6 +31,10 @@ public class FragmentPrescricao extends Fragment {
 
     SharedPreferences.Editor preferences;
 
+    double valorPorcento = 0.0;
+    String strValorPorcento = "";
+    String strTipo= "";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
