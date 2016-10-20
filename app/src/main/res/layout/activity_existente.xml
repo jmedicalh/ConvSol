@@ -83,7 +83,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="14dp"
-                android:id="@+id/txtOsmolaridade" />
+                android:id="@+id/txtOsmolaridadeExistente" />
         </TableRow>
     </TableLayout>
 
