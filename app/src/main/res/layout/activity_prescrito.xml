@@ -20,7 +20,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/tblPrimeiro"
-        android:layout_height="80dp">
+        android:layout_height="85dp">
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
