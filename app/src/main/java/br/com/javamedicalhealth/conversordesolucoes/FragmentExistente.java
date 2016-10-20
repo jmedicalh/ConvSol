@@ -2,6 +2,7 @@ package br.com.javamedicalhealth.conversordesolucoes;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,9 @@ public class FragmentExistente extends Fragment {
     private Spinner spnTipo;
 
     SharedPreferences.Editor preferences;
+
+    String valorPorcento = "";
+    String strTipo= "";
 
 
     @Nullable
@@ -65,6 +69,7 @@ public class FragmentExistente extends Fragment {
 
 
         //validações dos campos onleave
+
         txtPorcento.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -72,13 +77,13 @@ public class FragmentExistente extends Fragment {
                     if(txtPorcento.getText().length() < 1){
                         txtPorcento.setText("0");
                     }
-                    String v = txtPorcento.getText().toString();
-                    if(v.indexOf(".") == 0){
-                        v = "0" + v;
-                    }else if(v.endsWith(".")){
-                        v += "0";
+                    valorPorcento = txtPorcento.getText().toString();
+                    if(valorPorcento.indexOf(".") == 0){
+                        valorPorcento = "0" + valorPorcento;
+                    }else if(valorPorcento.endsWith(".")){
+                        valorPorcento += "0";
                     }
-                    txtPorcento.setText(v);
+                    txtPorcento.setText(valorPorcento);
                     salvaValores();
                 }
             }
@@ -93,7 +98,9 @@ public class FragmentExistente extends Fragment {
                         txtVolume.setText("0");
                     }
                     salvaValores();
-
+                    if(valorPorcento != ""){
+                        caculaOsmolaridade(Double.parseDouble(valorPorcento));
+                    }
                 }
             }
         });
@@ -101,6 +108,7 @@ public class FragmentExistente extends Fragment {
         spnTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                strTipo = adapterView.getSelectedItem().toString();
                 salvaValores();
             }
 
@@ -143,10 +151,12 @@ public class FragmentExistente extends Fragment {
         preferences.commit();
     }
 
-    private void caculaOsmolaridade(double porcentagem, String tipo){
+    private void caculaOsmolaridade(double porcentagem){
+        Resources resources = getResources();
+        String osmolaridade = resources.getString(R.string.osmolaridade);
         CalculoOsmolaridade calculoOsmolaridade = new CalculoOsmolaridade();
-        String valor = calculoOsmolaridade.calculaOsmolaridade(porcentagem, tipo);
+        String valor = calculoOsmolaridade.calculaOsmolaridade(porcentagem, strTipo);
         TextView txtOsmolaridade = (TextView)getActivity().findViewById(R.id.txtOsmolaridade);
-        txtOsmolaridade.setText(txtOsmolaridade.getText() + " é de " + valor);
+        txtOsmolaridade.setText(osmolaridade + " é de " + valor);
     }
 }
