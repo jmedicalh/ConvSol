@@ -22,7 +22,7 @@ public class CalculoOsmolaridade {
         String t = "";
         if(tipo.equals("SF"))
             t = String.valueOf(( (porcentagem / 0.100) *( 1 / NaCl)) * 2 * 1000);
-        else if (tipo.equals("G"))
+        else if (tipo.equals("G")  || tipo.equals("SG"))
             t = String.valueOf(( (porcentagem / 0.100) *( 1 / G)) * 1 * 1000);
         return  t;
     }
