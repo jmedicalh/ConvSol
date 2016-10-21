@@ -1,5 +1,7 @@
 package br.com.javamedicalhealth.conversordesolucoes.conversor;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
@@ -21,16 +23,13 @@ public class CalculoOsmolaridade {
 
 
     public String calculaOsmolaridade(Double porcentagem, String tipo){
-        
-        double resultado = 0f;
+        BigDecimal bigDecimal = null;
 
         if(tipo.equals("SF"))
-            resultado = ( (porcentagem / 0.100) *( 1 / NaCl)) * 2 * 1000;
+            bigDecimal = new BigDecimal ( ( (porcentagem / 0.100) *( 1 / NaCl)) * 2 * 1000) ;
         else if (tipo.equals("G")  || tipo.equals("SG"))
-            resultado = ((porcentagem / 0.100) * (1 / G)) * 1 * 1000;
+            bigDecimal = new BigDecimal ( ( (porcentagem / 0.100) * (1 / G)) * 1 * 1000 );
 
-        DecimalFormat formato = new DecimalFormat("#.##");
-        resultado = Double.valueOf(formato.format(resultado));
-        return String.valueOf(resultado);
+        return bigDecimal.setScale(2, RoundingMode.HALF_EVEN).toString();
     }
 }
