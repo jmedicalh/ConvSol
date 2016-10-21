@@ -99,9 +99,6 @@ public class FragmentPrescricao extends Fragment {
                         txtVolume.setText("0");
                     }
                     salvaValores();
-                    if(strValorPorcento != ""){
-                        caculaOsmolaridade();
-                    }
                 }
             }
         });
@@ -118,6 +115,7 @@ public class FragmentPrescricao extends Fragment {
 
             }
         });
+        caculaOsmolaridade();
     }
 
     @Override
