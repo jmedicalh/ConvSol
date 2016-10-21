@@ -1,5 +1,7 @@
 package br.com.javamedicalhealth.conversordesolucoes.conversor;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by gaijin on 20/10/2016.
  */
@@ -19,11 +21,16 @@ public class CalculoOsmolaridade {
 
 
     public String calculaOsmolaridade(Double porcentagem, String tipo){
-        String t = "";
+        
+        double resultado = 0f;
+
         if(tipo.equals("SF"))
-            t = String.valueOf(( (porcentagem / 0.100) *( 1 / NaCl)) * 2 * 1000);
+            resultado = ( (porcentagem / 0.100) *( 1 / NaCl)) * 2 * 1000;
         else if (tipo.equals("G")  || tipo.equals("SG"))
-            t = String.valueOf(( (porcentagem / 0.100) *( 1 / G)) * 1 * 1000);
-        return String.format(t, "%.2f" );
+            resultado = ((porcentagem / 0.100) * (1 / G)) * 1 * 1000;
+
+        DecimalFormat formato = new DecimalFormat("#.##");
+        resultado = Double.valueOf(formato.format(resultado));
+        return String.valueOf(resultado);
     }
 }
