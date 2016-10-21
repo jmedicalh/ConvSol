@@ -60,7 +60,7 @@ public class FragmentPrescricao extends Fragment {
 
         if(savedInstanceState != null){
             txtPorcento.setText(String.valueOf(savedInstanceState.getSerializable("txtPorcento")));
-            valorPorcento =  Double.valueOf ("txtPorcento");
+            valorPorcento =  Double.valueOf (savedInstanceState.getSerializable("txtPorcento").toString());
             txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
             strTipo = tipos[Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString())];
