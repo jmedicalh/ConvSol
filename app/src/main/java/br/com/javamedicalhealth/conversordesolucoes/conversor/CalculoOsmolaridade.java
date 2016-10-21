@@ -29,7 +29,8 @@ public class CalculoOsmolaridade {
             bigDecimal = new BigDecimal ( ( (porcentagem / 0.100) *( 1 / NaCl)) * 2 * 1000) ;
         else if (tipo.equals("G")  || tipo.equals("SG"))
             bigDecimal = new BigDecimal ( ( (porcentagem / 0.100) * (1 / G)) * 1 * 1000 );
-
+        else
+            return "0.0";
         return bigDecimal.setScale(2, RoundingMode.HALF_EVEN).toString();
     }
 }
