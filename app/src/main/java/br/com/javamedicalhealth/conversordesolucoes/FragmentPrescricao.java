@@ -55,10 +55,15 @@ public class FragmentPrescricao extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
+        Resources resources = getResources();
+        String [] tipos = resources.getStringArray(R.array.tipoSoro);
+
         if(savedInstanceState != null){
             txtPorcento.setText(String.valueOf(savedInstanceState.getSerializable("txtPorcento")));
+            valorPorcento =  Double.valueOf ("txtPorcento");
             txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
+            strTipo = tipos[Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString())];
         } else {
             Context context = getActivity();
             SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
@@ -68,8 +73,6 @@ public class FragmentPrescricao extends Fragment {
             txtVolume.setText(String.valueOf(prefs.getInt("volumePrescrito", 0)));
 
             spnTipo.setSelection(prefs.getInt("tipoPrescrito", 0));
-            Resources resources = getResources();
-            String [] tipos = resources.getStringArray(R.array.tipoSoro);
             strTipo = tipos[prefs.getInt("tipoPrescrito", 0)];
         }
 
