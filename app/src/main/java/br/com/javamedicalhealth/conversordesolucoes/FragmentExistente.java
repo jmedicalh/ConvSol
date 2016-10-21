@@ -62,10 +62,13 @@ public class FragmentExistente extends Fragment {
             SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
             txtPorcento.setText(String.valueOf(prefs.getFloat("porcentExistente", 0f)));
-
+            valorPorcento = prefs.getFloat("porcentExistente", 0f);
             txtVolume.setText(String.valueOf(prefs.getInt("volumeExistente", 0)));
 
             spnTipo.setSelection(prefs.getInt("tipoExistente", 0));
+            Resources resources = getResources();
+            String [] tipos = resources.getStringArray(R.array.tipoSoro);
+            strTipo = tipos[prefs.getInt("tipoExistente", 0)];
         }
 
 
@@ -100,9 +103,6 @@ public class FragmentExistente extends Fragment {
                         txtVolume.setText("0");
                     }
                     salvaValores();
-                    if(strValorPorcento != ""){
-                        caculaOsmolaridade();
-                    }
                 }
             }
         });
@@ -119,7 +119,7 @@ public class FragmentExistente extends Fragment {
 
             }
         });
-        preferences.commit();
+        caculaOsmolaridade();
     }
 
     @Override
