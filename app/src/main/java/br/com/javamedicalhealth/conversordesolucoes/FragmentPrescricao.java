@@ -64,10 +64,13 @@ public class FragmentPrescricao extends Fragment {
             SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
 
             txtPorcento.setText(String.valueOf(prefs.getFloat("porcentPrescrito", 0f)));
-
+            valorPorcento = prefs.getFloat("porcentPrescrito", 0f);
             txtVolume.setText(String.valueOf(prefs.getInt("volumePrescrito", 0)));
 
             spnTipo.setSelection(prefs.getInt("tipoPrescrito", 0));
+            Resources resources = getResources();
+            String [] tipos = resources.getStringArray(R.array.tipoSoro);
+            strTipo = tipos[prefs.getInt("tipoPrescrito", 0)];
         }
 
         //validações dos campos onleave
