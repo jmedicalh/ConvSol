@@ -52,11 +52,15 @@ public class FragmentExistente extends Fragment {
         spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
 
         super.onActivityCreated(savedInstanceState);
+        Resources resources = getResources();
+        String [] tipos = resources.getStringArray(R.array.tipoSoro);
 
         if(savedInstanceState != null){
             txtPorcento.setText(String.valueOf(savedInstanceState.getSerializable("txtPorcento")));
+            valorPorcento =  Double.valueOf (savedInstanceState.getSerializable("txtPorcento").toString());
             txtVolume.setText(String.valueOf(savedInstanceState.getSerializable("txtVolume")));
             spnTipo.setSelection(Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString()));
+            strTipo = tipos[Integer.parseInt(savedInstanceState.getSerializable("spnTipo").toString())];
         } else {
             Context context = getActivity();
             SharedPreferences prefs = context.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
@@ -66,8 +70,6 @@ public class FragmentExistente extends Fragment {
             txtVolume.setText(String.valueOf(prefs.getInt("volumeExistente", 0)));
 
             spnTipo.setSelection(prefs.getInt("tipoExistente", 0));
-            Resources resources = getResources();
-            String [] tipos = resources.getStringArray(R.array.tipoSoro);
             strTipo = tipos[prefs.getInt("tipoExistente", 0)];
         }
 
