@@ -93,6 +93,7 @@ public class FragmentExistente extends Fragment {
                     salvaValores();
                     valorPorcento = Double.parseDouble(strValorPorcento);
                 }
+                caculaOsmolaridade();
             }
         });
 
@@ -106,6 +107,7 @@ public class FragmentExistente extends Fragment {
                     }
                     salvaValores();
                 }
+                caculaOsmolaridade();
             }
         });
 
@@ -114,6 +116,7 @@ public class FragmentExistente extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 strTipo = adapterView.getSelectedItem().toString();
                 salvaValores();
+                caculaOsmolaridade();
             }
 
             @Override
