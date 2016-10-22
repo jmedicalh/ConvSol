@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragExistente, existente, "fragExistente")
                 .add(R.id.fragAmpola, ampolas, "fragAmpolas")
                 .add(R.id.fragBotao, botao, "fragBotao")
-                .addToBackStack(null)
+                .addToBackStack("fragPrescricao")
                 .commit();
     }
 
@@ -103,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void chamaResultado() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragPrescricao, resultado);
+        ft.replace(R.id.fragPrescricao, resultado, "fragResultado")
+        .addToBackStack("fragResultado");
         ft.commit();
     }
 
@@ -123,4 +124,32 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    @Override
+    public void onBackPressed() {
+        // initialize variables
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        int i = fm.getBackStackEntryCount();
+
+        // check to see if stack is empty
+        if (i > 0) {
+
+            String tag = getSupportFragmentManager().getBackStackEntryAt(
+                    getSupportFragmentManager().getBackStackEntryCount() -1).getName();
+
+            if(tag.equals("fragResultado")){
+                reInflaFragments();
+            }
+        }
+
+        /*
+
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0 ) {
+            getSupportFragmentManager().popBackStack();
+        }
+
+
+        */
+        //super.onBackPressed();
+    }
 }
