@@ -142,14 +142,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        /*
-
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0 ) {
-            getSupportFragmentManager().popBackStack();
-        }
-
-
-        */
-        //super.onBackPressed();
     }
 }
