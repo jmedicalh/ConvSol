@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/lblUtilizar"
-        android:textColor="#FFF"
         android:id="@+id/textView3"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -32,7 +30,6 @@
                 android:id="@+id/spnAmpola"
                 android:entries="@array/ampola"
                 android:freezesText="true"
-                android:textColor="#FFF"
                 android:layout_height="match_parent"
                 android:layout_width="99dp" />
 
@@ -44,7 +41,6 @@
                 android:digits="1234567890."
                 android:maxLength="4"
                 android:text="@string/zero"
-                android:textColor="#FFF"
                 android:freezesText="true"
                 android:layout_width="fill_parent"
                 android:imeOptions="actionNext"/>
@@ -52,7 +48,6 @@
             <TextView
                 android:id="@+id/txtVolumeDesejado"
                 android:text="@string/lblVolume"
-                android:textColor="#FFF"
                 android:layout_width="wrap_content"/>
 
             <EditText
@@ -63,7 +58,6 @@
                 android:maxLength="4"
                 android:id="@+id/txtVolumeAmpola"
                 android:text="@string/zero"
-                android:textColor="#FFF"
                 android:freezesText="true"
                 android:layout_width="80dp"
                 android:imeOptions="actionDone"/>
@@ -71,7 +65,6 @@
             <TextView
                 android:id="@+id/txtML3"
                 android:text="@string/ml"
-                android:textColor="#FFF"
                 android:layout_width="wrap_content"/>
         </TableRow>
     </TableLayout>
