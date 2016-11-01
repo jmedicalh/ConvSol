@@ -31,4 +31,8 @@
     <string name="resultado">Resultado:</string>
     <string name="ok">OK</string>
     <string name="osmolaridade">Valor da Osmolaridade</string>
+    <string name="sobre">Este sistema utiliza formulas reconhecidas na literatura de enfermagem para recalcular
+    a conventração de soluções fisiológicas e glicosadas, cabe ao médico a prescrição de tais
+    soluções para o paciente.\nNo site www.javamedicalhealth.com.br entra-se todo o tutorial de utilização
+    e informações mais detalhadas do calculo.</string>
 </resources>
