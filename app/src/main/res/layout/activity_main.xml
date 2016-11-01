@@ -25,17 +25,20 @@
             android:id="@+id/fragExistente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fragPrescricao"/>
+            android:layout_below="@+id/fragPrescricao"
+            android:layout_marginTop="10dp"/>
         <FrameLayout
             android:id="@+id/fragAmpola"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fragExistente"/>
+            android:layout_below="@+id/fragExistente"
+            android:layout_marginTop="10dp"/>
         <FrameLayout
             android:id="@+id/fragBotao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/fragAmpola"/>
+            android:layout_below="@+id/fragAmpola"
+            android:layout_marginTop="10dp"/>
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
