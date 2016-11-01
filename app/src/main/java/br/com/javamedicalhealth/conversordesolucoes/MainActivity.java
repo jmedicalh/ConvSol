@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentAmpolas ampolas = new FragmentAmpolas();
     FragmentBotao botao = new FragmentBotao();
     FragmentResultado resultado = new FragmentResultado();
+    FragmentDireito direito = new FragmentDireito();
 
     //propaganda
     private AdView mAdView;
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack("fragExistente")
                     .remove(ampolas)
                     .remove(botao)
+                    .add(R.id.fragDireito, direito,"fragDireito")
                 .commit();
         }
 
