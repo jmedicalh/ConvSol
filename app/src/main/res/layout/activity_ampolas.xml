@@ -13,59 +13,67 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TableLayout
-        android:orientation="vertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tblPrimeiro"
-        android:layout_height="80dp">
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_margin="3dp">
+        android:layout_height="90dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        >
 
-            <Spinner
-                android:id="@+id/spnAmpola"
-                android:entries="@array/ampola"
-                android:freezesText="true"
-                android:layout_height="match_parent"
-                android:layout_width="99dp" />
+        <Spinner
+            android:id="@+id/spnAmpola"
+            android:entries="@array/ampola"
+            android:freezesText="true"
+            android:layout_height="35dp"
+            android:layout_width="99dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-            <EditText
-                android:selectAllOnFocus="true"
-                android:inputType="numberDecimal"
-                android:ems="3"
-                android:id="@+id/txtPorcentoAmpola"
-                android:digits="1234567890."
-                android:maxLength="4"
-                android:text="@string/zero"
-                android:freezesText="true"
-                android:layout_width="fill_parent"
-                android:imeOptions="actionNext"/>
+        <EditText
+            android:selectAllOnFocus="true"
+            android:inputType="numberDecimal"
+            android:ems="3"
+            android:id="@+id/txtPorcentoAmpola"
+            android:digits="1234567890."
+            android:maxLength="4"
+            android:text="@string/zero"
+            android:freezesText="true"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:imeOptions="actionNext"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="25dp" />
 
-            <TextView
-                android:id="@+id/txtVolumeDesejado"
-                android:text="@string/lblVolume"
-                android:layout_width="wrap_content"/>
+        <TextView
+            android:id="@+id/txtVolumeDesejado"
+            android:text="@string/lblVolume"
+            android:layout_alignParentRight="@+id/txtPorcentoAmpola"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"/>
 
-            <EditText
-                android:selectAllOnFocus="true"
-                android:inputType="number"
-                android:ems="4"
-                android:digits="1234567890"
-                android:maxLength="4"
-                android:id="@+id/txtVolumeAmpola"
-                android:text="@string/zero"
-                android:freezesText="true"
-                android:layout_width="80dp"
-                android:imeOptions="actionDone"/>
+        <EditText
+            android:selectAllOnFocus="true"
+            android:inputType="number"
+            android:ems="4"
+            android:digits="1234567890"
+            android:maxLength="4"
+            android:id="@+id/txtVolumeAmpola"
+            android:text="@string/zero"
+            android:freezesText="true"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:imeOptions="actionDone"/>
 
-            <TextView
-                android:id="@+id/txtML3"
-                android:text="@string/ml"
-                android:layout_width="wrap_content"/>
-        </TableRow>
-    </TableLayout>
+        <TextView
+            android:id="@+id/txtML3"
+            android:text="@string/ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            />
+
+    </LinearLayout>
 </RelativeLayout>
