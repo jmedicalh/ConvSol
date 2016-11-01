@@ -20,4 +20,11 @@ public class FragmentDireito extends Fragment{
         View view = inflater.inflate(R.layout.acitivty_main_land_proximo, container, false);
         return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        txtInfo = (TextView)getActivity().findViewById(R.id.txtinforuser);
+        proximo = (Button)getActivity().findViewById(R.id.cmdProximo);
+    }
 }
