@@ -26,5 +26,27 @@ public class FragmentDireito extends Fragment{
         super.onActivityCreated(savedInstanceState);
         txtInfo = (TextView)getActivity().findViewById(R.id.txtinforuser);
         proximo = (Button)getActivity().findViewById(R.id.cmdProximo);
+
+        proximo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //apago os fragmentos
+                ((MainActivity)getActivity()).apagaFragments();
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
