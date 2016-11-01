@@ -1,6 +1,7 @@
 package br.com.javamedicalhealth.conversordesolucoes;
 
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
 public class MainActivity extends AppCompatActivity {
 
+    //para saber o posicionamento
+    String posicao = "";
     //fragmentos
     FragmentPrescricao prescricao = new FragmentPrescricao();
     FragmentExistente existente = new FragmentExistente();
@@ -89,17 +92,29 @@ public class MainActivity extends AppCompatActivity {
     //fim das necessidades das propagandas
 
     private void inflaFragmentos() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft
-                .add(R.id.fragPrescricao, prescricao, "fragPrescricao")
-                .add(R.id.fragExistente, existente, "fragExistente")
-                .add(R.id.fragAmpola, ampolas, "fragAmpolas")
-                .add(R.id.fragBotao, botao, "fragBotao")
-                .addToBackStack("fragPrescricao")
-                .commit();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft
+                    .add(R.id.fragPrescricao, prescricao, "fragPrescricao")
+                    .add(R.id.fragExistente, existente, "fragExistente")
+                    .add(R.id.fragAmpola, ampolas, "fragAmpolas")
+                    .add(R.id.fragBotao, botao, "fragBotao")
+                    .addToBackStack("fragPrescricao")
+                    .commit();
+
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        String tag = getSupportFragmentManager().getBackStackEntryAt(
+                getSupportFragmentManager().getBackStackEntryCount() -1).getName();
+        if(tag.equals("")){
+            inflaFragmentos();
+        }else{
+            reInflaFragments();
+        }
 
+    }
 
     public void chamaResultado() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -114,6 +129,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reInflaFragments(){
+        //verifico se estou no modo landscap ou portrait
+        if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            posicao = "landscape";
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            posicao = "portrait";
+        }
+
+        if (posicao.equals("portrait")) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft
                 .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
@@ -122,13 +145,21 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.fragBotao, botao, "fragBotao")
                 .addToBackStack(null)
                 .commit();
+        }else{
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft
+                    .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
+                    .add(R.id.fragExistente, existente, "fragExistente")
+                    .addToBackStack("fragPrescricao")
+                    .commit();
+        }
     }
 
     @Override
     public void onBackPressed() {
         // initialize variables
         FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+        //FragmentTransaction ft = fm.beginTransaction();
         int i = fm.getBackStackEntryCount();
 
         // check to see if stack is empty
