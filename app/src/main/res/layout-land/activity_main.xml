@@ -25,18 +25,24 @@
         </com.google.android.gms.ads.AdView>
 
         <FrameLayout
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/fragPrescricao"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/adView"/>
         <FrameLayout
             android:id="@+id/fragExistente"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fragPrescricao"
             android:layout_marginTop="10dp"/>
 
+        <FrameLayout
+            android:id="@+id/fragDireito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/adView">
+        </FrameLayout>
 
 
 
