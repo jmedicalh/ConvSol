@@ -92,20 +92,18 @@ public class MainActivity extends AppCompatActivity {
     //fim das necessidades das propagandas
 
     private void inflaFragmentos() {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft
-                    .add(R.id.fragPrescricao, prescricao, "fragPrescricao")
-                    .add(R.id.fragExistente, existente, "fragExistente")
-                    .add(R.id.fragAmpola, ampolas, "fragAmpolas")
-                    .add(R.id.fragBotao, botao, "fragBotao")
-                    .addToBackStack("fragPrescricao")
-                    .commit();
-
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft
+                .add(R.id.fragPrescricao, prescricao, "fragPrescricao")
+                .add(R.id.fragExistente, existente, "fragExistente")
+                .add(R.id.fragAmpola, ampolas, "fragAmpolas")
+                .add(R.id.fragBotao, botao, "fragBotao")
+                .addToBackStack("fragPrescricao")
+                .commit();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         String tag = getSupportFragmentManager().getBackStackEntryAt(
                 getSupportFragmentManager().getBackStackEntryCount() -1).getName();
         if(tag.equals("")){
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             reInflaFragments();
         }
-
+        super.onConfigurationChanged(newConfig);
     }
 
     public void chamaResultado() {
@@ -137,22 +135,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (posicao.equals("portrait")) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft
-                .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
-                .add(R.id.fragExistente, existente, "fragExistente")
-                .add(R.id.fragAmpola, ampolas, "fragAmpolas")
-                .add(R.id.fragBotao, botao, "fragBotao")
-                .addToBackStack(null)
-                .commit();
-        }else{
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft
-                    .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
-                    .add(R.id.fragExistente, existente, "fragExistente")
+                .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
                     .addToBackStack("fragPrescricao")
-                    .commit();
+                .replace(R.id.fragExistente, existente, "fragExistente")
+                    .addToBackStack("fragExistente")
+                .replace(R.id.fragAmpola, ampolas, "fragAmpolas")
+                    .addToBackStack("fragAmpolas")
+                .replace(R.id.fragBotao, botao, "fragBotao")
+                    .addToBackStack("fragBotao")
+                .addToBackStack("fragPrescricao")
+                .commit();
+
+        }else if(posicao.equals("landscape")) {
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft
+                .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
+                .addToBackStack("fragPrescricao")
+                .replace(R.id.fragExistente, existente, "fragExistente")
+                .addToBackStack("fragExistente")
+                    .remove(ampolas)
+                    .remove(botao)
+                .commit();
         }
+
     }
 
     @Override
