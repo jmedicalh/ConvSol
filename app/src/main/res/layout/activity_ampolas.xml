@@ -26,9 +26,7 @@
             android:freezesText="true"
             android:layout_height="35dp"
             android:layout_width="99dp"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_marginTop="20dp" />
 
         <EditText
             android:selectAllOnFocus="true"
