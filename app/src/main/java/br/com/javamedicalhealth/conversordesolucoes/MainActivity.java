@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         preferences = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
         if(savedInstanceState == null){
@@ -117,8 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void chamaResultado() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragPrescricao, resultado, "fragResultado")
-        .addToBackStack("fragResultado");
+        ft
+                .replace(R.id.fragPrescricao, resultado, "fragResultado")
+                .remove( existente)
+                .remove(ampolas)
+                .remove(botao)
+                .addToBackStack("fragResultado");
         ft.commit();
     }
 
@@ -134,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             posicao = "portrait";
         }
+        //apagaFragments();
 
         if (posicao.equals("portrait")) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -153,13 +159,13 @@ public class MainActivity extends AppCompatActivity {
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft
+                .replace(R.id.fragAmpola, direito,"fragDireito")
+                .addToBackStack("fragDireito")
                 .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
                 .addToBackStack("fragPrescricao")
                 .replace(R.id.fragExistente, existente, "fragExistente")
                 .addToBackStack("fragExistente")
-                    .remove(ampolas)
-                    .remove(botao)
-                    .add(R.id.fragDireito, direito,"fragDireito")
+                .remove(botao)
                 .commit();
         }
 
