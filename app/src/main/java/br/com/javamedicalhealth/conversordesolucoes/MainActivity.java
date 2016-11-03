@@ -17,15 +17,12 @@ import br.com.javamedicalhealth.conversordesolucoes.modelos.ModelSolucao;
 
 public class MainActivity extends AppCompatActivity {
 
-    //para saber o posicionamento
-    String posicao = "";
     //fragmentos
     FragmentPrescricao prescricao = new FragmentPrescricao();
     FragmentExistente existente = new FragmentExistente();
     FragmentAmpolas ampolas = new FragmentAmpolas();
     FragmentBotao botao = new FragmentBotao();
     FragmentResultado resultado = new FragmentResultado();
-    FragmentDireito direito = new FragmentDireito();
 
     //propaganda
     private AdView mAdView;
@@ -133,41 +130,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reInflaFragments(){
-        //verifico se estou no modo landscap ou portrait
-        if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            posicao = "landscape";
-        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            posicao = "portrait";
-        }
-        //apagaFragments();
-
-        if (posicao.equals("portrait")) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft
-                .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
-                    .addToBackStack("fragPrescricao")
-                .replace(R.id.fragExistente, existente, "fragExistente")
-                    .addToBackStack("fragExistente")
-                .replace(R.id.fragAmpola, ampolas, "fragAmpolas")
-                    .addToBackStack("fragAmpolas")
-                .replace(R.id.fragBotao, botao, "fragBotao")
-                    .addToBackStack("fragBotao")
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft
+            .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
                 .addToBackStack("fragPrescricao")
-                .commit();
-
-        }else if(posicao.equals("landscape")) {
-
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft
-                .replace(R.id.fragAmpola, direito,"fragDireito")
-                .addToBackStack("fragDireito")
-                .replace(R.id.fragPrescricao, prescricao, "fragPrescricao")
-                .addToBackStack("fragPrescricao")
-                .replace(R.id.fragExistente, existente, "fragExistente")
+            .replace(R.id.fragExistente, existente, "fragExistente")
                 .addToBackStack("fragExistente")
-                .remove(botao)
-                .commit();
-        }
+            .replace(R.id.fragAmpola, ampolas, "fragAmpolas")
+                .addToBackStack("fragAmpolas")
+            .replace(R.id.fragBotao, botao, "fragBotao")
+                .addToBackStack("fragBotao")
+            .addToBackStack("fragPrescricao")
+            .commit();
 
     }
 
