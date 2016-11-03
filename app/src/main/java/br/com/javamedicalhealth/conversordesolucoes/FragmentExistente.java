@@ -99,7 +99,8 @@ public class FragmentExistente extends Fragment {
                     salvaValores();
                     valorPorcento = Double.parseDouble(strValorPorcento);
                 }
-                caculaOsmolaridade();
+                if(txtPorcento != null)
+                    caculaOsmolaridade();
             }
         });
 
@@ -130,7 +131,8 @@ public class FragmentExistente extends Fragment {
 
             }
         });
-        caculaOsmolaridade();
+        if(txtPorcento != null)
+            caculaOsmolaridade();
     }
 
     @Override
