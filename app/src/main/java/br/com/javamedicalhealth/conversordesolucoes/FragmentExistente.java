@@ -47,11 +47,16 @@ public class FragmentExistente extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         preferences = this.getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
-        txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoExistente);
-        txtVolume = (TextView)getActivity().findViewById(R.id.txtVolumeExistente);
-        spnTipo = (Spinner)getActivity().findViewById(R.id.spnExistente);
+        if(txtPorcento == null){
+            txtPorcento = (TextView)getActivity().findViewById(R.id.txtPorcentoExistente);
+        }
+        if(txtVolume == null) {
+            txtVolume = (TextView) getActivity().findViewById(R.id.txtVolumeExistente);
+        }
+        if(spnTipo == null) {
+            spnTipo = (Spinner) getActivity().findViewById(R.id.spnExistente);
+        }
 
-        super.onActivityCreated(savedInstanceState);
         Resources resources = getResources();
         String [] tipos = resources.getStringArray(R.array.tipoSoro);
 
@@ -73,6 +78,7 @@ public class FragmentExistente extends Fragment {
             strTipo = tipos[prefs.getInt("tipoExistente", 0)];
         }
 
+        super.onActivityCreated(savedInstanceState);
 
         //validações dos campos onleave
 
